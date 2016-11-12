@@ -1,3 +1,5 @@
+var Hls = require('hls.js');
+
 module.exports = ['$sce', function ($sce) {
   return {
     restrict: 'E',
