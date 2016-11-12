@@ -1,6 +1,6 @@
 {
   "name": "angular-hls-video",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple angular directive that provides support for hls streaming to multiple browsers",
   "main": "src/index.js",
   "scripts": {
