@@ -13,8 +13,6 @@ module.exports = ['$sce', function ($sce) {
     template: '<div><video class="video-to-play" preload="metadata"></video></div>',
     link: function (scope, element, attr) {
       var outerDiv = element.children()[0];
-      scope.safeStreamingSrc = $sce.trustAsResourceUrl(scope.streamingSrc);
-      scope.safeFallbackSrc = $sce.trustAsResourceUrl(scope.fallbackSrc);
       var videoElement = document.getElementsByClassName('video-to-play')[0];
       var isProperHeight = !isNaN(parseInt(scope.height));
       var isProperWidth = !isNaN(parseInt(scope.width));
