@@ -6,7 +6,7 @@ module.exports = ['$sce', function ($sce) {
     scope: {
       thumbnail: '@',
       streamingSrc: '@',
-      fallbackSrc: '@',
+      fallbacks: '<',
       height: '@',
       width: '@'
     },
@@ -16,9 +16,11 @@ module.exports = ['$sce', function ($sce) {
       scope.safeStreamingSrc = $sce.trustAsResourceUrl(scope.streamingSrc);
       scope.safeFallbackSrc = $sce.trustAsResourceUrl(scope.fallbackSrc);
       var videoElement = document.getElementsByClassName('video-to-play')[0];
+      var isProperHeight = !isNaN(parseInt(scope.height));
+      var isProperWidth = !isNaN(parseInt(scope.width));
       videoElement.setAttribute("controls","controls");
-      videoElement.setAttribute("height", "270");
-      videoElement.setAttribute("width", "480");
+      videoElement.setAttribute("height", isProperHeight ? scope.height : "270");
+      videoElement.setAttribute("width", isProperWidth ? scope.width : "480");
       var canPlayHls = videoElement.canPlayType('application/vnd.apple.mpegURL');
       if (canPlayHls === '' && Hls.isSupported()) {
         var hls = new Hls();
@@ -27,9 +29,11 @@ module.exports = ['$sce', function ($sce) {
       } else {
         var source = createSourceElement(scope.streamingSrc);
         videoElement.appendChild(source);
-        if (scope.fallbackSrc) {
-          var alternateSource = createSourceElement(scope.fallbackSrc);
-          videoElement.appendChild(alternateSource);
+        if (Array.isArray(scope.fallbacks)) {
+          scope.fallbacks.forEach(function (uri) {
+            var alternateSource = createSourceElement(uri);
+            videoElement.appendChild(alternateSource);
+          })
         }
       }
     }
