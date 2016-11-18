@@ -1,7 +1,11 @@
 {
   "name": "angular-hls-video",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple angular directive that provides support for hls streaming to multiple browsers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbarabander/angular-responsive-video.git"
+  },
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,10 +14,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "angular": "^1.5.8",
     "browserify": "^13.1.1"
   },
+  "peerDependencies": {
+    "angular": "1.x"
+  },
   "dependencies": {
-    "angular": "^1.5.8",
     "hls.js": "^0.6.9"
   }
 }
